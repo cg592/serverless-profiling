@@ -17,7 +17,7 @@ r = requests.get(url = URL, params = PARAMS)
 # extracting data in json format
 data = r.json()
 
-output = open("output_va_concurr_3frames_1replica.txt", "a")
+output = open("output_va_concurr_3frames_2replica_medium.txt", "a")
 output.write("URL: " + URL + "\n")
 
 filtered = list(filter(lambda d: 'videoservice.videodecoder/decode' in d["name"], data))
