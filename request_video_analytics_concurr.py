@@ -3,13 +3,15 @@ import requests
 import sys
 
 # api-endpoint
-URL = sys.argv[1]
+# URL = sys.argv[1]
 
 # location given here
-location = "delhi technological university"
-
-# defining a params dict for the parameters to be sent to the API
-PARAMS = {'address':location}
+# location = "delhi technological university"
+#
+# # defining a params dict for the parameters to be sent to the API
+# PARAMS = {'serviceName':'decoder'}
+# PARAMS = {'serviceName':'video streaming@8d66540e82f8-fu'}
+PARAMS = {'serviceName':'recog'}
 
 # sending get request and saving the response as response object
 # r = requests.get(url = URL, params = PARAMS)
@@ -17,14 +19,20 @@ PARAMS = {'address':location}
 # extracting data in json format
 # data = r.json()
 
-output = open("output_va_concurr_20frames_2replica.txt", "a")
+output = open("output_va_concurr_20frames_2replica_11522.txt", "a")
 recog_diff = []
 
-for i in range(1, len(sys.argv)):
-    URL = sys.argv[i]
-    # localhost:9411/api/v2/traces
+# for i in range(1, len(sys.argv)):
+for i in range(1, 2):
+    print("here")
+    # URL = sys.argv[i]
+    URL = "http://localhost:9411/zipkin/api/v2/traces"
+    PARAMS = {'serviceName':'decoder'}
     r = requests.get(url = URL, params = PARAMS)
+    # print(r)
     data = r.json()
+    data = data[0]
+    # print(data)
     output.write("URL: " + URL + "\n")
 
     filtered = list(filter(lambda d: 'videoservice.videodecoder/decode' in d["name"], data))
