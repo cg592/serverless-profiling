@@ -22,6 +22,7 @@ recog_diff = []
 
 for i in range(1, len(sys.argv)):
     URL = sys.argv[i]
+    # localhost:9411/api/v2/traces
     r = requests.get(url = URL, params = PARAMS)
     data = r.json()
     output.write("URL: " + URL + "\n")
@@ -48,7 +49,7 @@ for i in range(1, len(sys.argv)):
     filtered = list(filter(lambda d: d["name"] == '/videoservice.objectrecognition/recognise', data))
     if (len(filtered) != 0):
         recog_times = [elem['timestamp'] for elem in filtered]
-        recog_times.sort() 
+        recog_times.sort()
         local_diff = recog_times[1] - recog_times[0]
         print("local diff: " + str(local_diff))
         recog_diff.append(local_diff)
