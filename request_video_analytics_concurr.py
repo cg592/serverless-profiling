@@ -3,10 +3,10 @@ import requests
 import sys
 import time
 
-output = open("o.txt", "a")
+output = open("o.txt", "w")
 
 URL = "http://localhost:9411/zipkin/api/v2/traces"
-PARAMS = {'serviceName':'decoder'}
+PARAMS = {'serviceName':'decoder', 'limit':2000}
 r = requests.get(url = URL, params = PARAMS)
 frames = sys.argv[1]
 
@@ -20,8 +20,6 @@ def divide_chunks(l, n):
 all_data_chunks = list(divide_chunks(all_data, int(frames)+1))
 
 for j in range(0, len(all_data_chunks)):
-    print(str(len(all_data_chunks)))
-    print(str(len(all_data_chunks[0])))
     recog_diff = []
     output.write("TRACE " + str(j) + ": " + str(all_data_chunks[j][0][0]['timestamp']) + "\n")
     for i in range(0, len(all_data_chunks[j])):
