@@ -1,61 +1,54 @@
 # importing the requests library
 import requests
 import sys
+import time
 
-# api-endpoint
-URL = sys.argv[1]
+output = open("o.txt", "w")
 
-# location given here
-location = "delhi technological university"
+URL = "http://localhost:9411/zipkin/api/v2/traces"
+PARAMS = {'serviceName':'decoder', 'limit':2000}
+r = requests.get(url = URL, params = PARAMS)
+frames = sys.argv[1]
 
-# defining a params dict for the parameters to be sent to the API
-PARAMS = {'address':location}
+all_data = r.json()
+all_data = sorted(all_data, key=lambda x: x[0]['timestamp'])
 
-# sending get request and saving the response as response object
-# r = requests.get(url = URL, params = PARAMS)
+def divide_chunks(l, n):
+    for i in range(0, len(l), n):
+        yield l[i:i + n]
 
-# extracting data in json format
-# data = r.json()
+all_data_chunks = list(divide_chunks(all_data, int(frames)+1))
 
-output = open("output_va_concurr_20frames_2replica.txt", "a")
-recog_diff = []
+for j in range(1, len(all_data_chunks)): # start on second req, script corrupts first req
+    recog_diff = []
+    output.write("TRACE " + str(j) + ": " + str(all_data_chunks[j][0][0]['timestamp']) + "\n")
+    for i in range(0, len(all_data_chunks[j])):
+        data = all_data_chunks[j][i]
+        filtered = list(filter(lambda d: 'videoservice.videodecoder/decode' in d["name"], data))
+        if (len(filtered) != 0):
+            streaming_timestamp = filtered[0]['timestamp']
+            # print(j, i)
+            decode_timestamp = filtered[1]['timestamp']
+            decode_diff = decode_timestamp - streaming_timestamp
+            output.write("Decode Diff: " + str(decode_diff) + "\n")
 
-for i in range(1, len(sys.argv)):
-    URL = sys.argv[i]
-    # localhost:9411/api/v2/traces
-    r = requests.get(url = URL, params = PARAMS)
-    data = r.json()
-    output.write("URL: " + URL + "\n")
+        filtered = list(filter(lambda d: d["name"] == 'helloworld.greeter/sayhello', data))
+        if (len(filtered) != 0):
+            duration = filtered[0]['duration']
+            output.write("Trace Duration: " + str(duration) + "\n")
 
-    filtered = list(filter(lambda d: 'videoservice.videodecoder/decode' in d["name"], data))
-    if (len(filtered) != 0):
-        # print(len(filtered))
-        streaming_timestamp = filtered[0]['timestamp']
-        # print(streaming_timestamp)
-        decode_timestamp = filtered[1]['timestamp']
-        # print(decode_timestamp)
-        decode_diff = decode_timestamp - streaming_timestamp
-        # print(decode_diff)
-        output.write("" + str(streaming_timestamp) + "\n")
-        output.write("" + str(decode_timestamp) + "\n")
-        output.write("Decode_diff: " + str(decode_diff) + "\n")
+        recog_times = []
+        filtered = list(filter(lambda d: d["name"] == '/videoservice.objectrecognition/recognise', data))
+        if (len(filtered) != 0):
+            recog_times = [elem['timestamp'] for elem in filtered]
+            recog_times.sort()
+            local_diff = recog_times[1] - recog_times[0]
+            # print("local diff: " + str(local_diff))
+            recog_diff.append(local_diff)
 
-    filtered = list(filter(lambda d: d["name"] == 'helloworld.greeter/sayhello', data))
-    if (len(filtered) != 0):
-        duration = filtered[0]['duration']
-        output.write("Duration: " + str(duration) + "\n")
-
-    recog_times = []
-    filtered = list(filter(lambda d: d["name"] == '/videoservice.objectrecognition/recognise', data))
-    if (len(filtered) != 0):
-        recog_times = [elem['timestamp'] for elem in filtered]
-        recog_times.sort()
-        local_diff = recog_times[1] - recog_times[0]
-        print("local diff: " + str(local_diff))
-        recog_diff.append(local_diff)
-
-# Once done, calculate max recognition time
-max_recog = max(recog_diff, default=0)
-output.write("Max Recog Diff: " + str(max_recog) + "\n")
+    # Once done, calculate max recognition time
+    max_recog = max(recog_diff, default=0)
+    output.write("Max Recog Diff: " + str(max_recog) + "\n")
+    output.write("-----------------------------------------\n")
 
 output.close()
