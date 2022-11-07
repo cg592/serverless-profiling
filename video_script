@@ -1,0 +1,16 @@
+#!/bin/bash  
+echo "Removing video service"  
+sudo docker stack rm video
+echo "Waiting for remove to finish"
+sleep 15
+echo "Deploying tracing yml"  
+sudo docker stack deploy -c docker-compose-tracing.yml video
+sleep 2
+for n in {1..20};
+do
+	echo "Running request $n"
+	../../tools/bin/grpcurl -plaintext ath-4:50051 helloworld.Greeter.SayHello
+	sleep 2
+done
+sleep 2
+echo "Finished running requests"
