@@ -1,5 +1,4 @@
 import sys
-import time
 
 name = sys.argv[1]
 input = open(name + ".txt", "r")
