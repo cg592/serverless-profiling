@@ -19,7 +19,7 @@ def divide_chunks(l, n):
 
 all_data_chunks = list(divide_chunks(all_data, int(frames)+1))
 
-for j in range(1, len(all_data_chunks)): # start on second req, script corrupts first req
+for j in range(0, len(all_data_chunks)):
     recog_diff = []
     output.write("TRACE " + str(j) + ": " + str(all_data_chunks[j][0][0]['timestamp']) + "\n")
     for i in range(0, len(all_data_chunks[j])):
