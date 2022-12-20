@@ -1,0 +1,50 @@
+TRACE 0: 1671555554913632
+Decode Diff: 60021
+Trace Duration: 1565033
+Max Recog Diff: 325488
+-----------------------------------------
+TRACE 1: 1671555558347046
+Decode Diff: 47582
+Trace Duration: 1214570
+Max Recog Diff: 285700
+-----------------------------------------
+TRACE 2: 1671555560573322
+Decode Diff: 43937
+Trace Duration: 1396560
+Max Recog Diff: 295129
+-----------------------------------------
+TRACE 3: 1671555562668076
+Decode Diff: 45678
+Trace Duration: 1296116
+Max Recog Diff: 310925
+-----------------------------------------
+TRACE 4: 1671555564779979
+Decode Diff: 51011
+Trace Duration: 1253380
+Max Recog Diff: 294396
+-----------------------------------------
+TRACE 5: 1671555566752426
+Decode Diff: 48577
+Trace Duration: 1289677
+Max Recog Diff: 295785
+-----------------------------------------
+TRACE 6: 1671555568630154
+Decode Diff: 43475
+Trace Duration: 1290257
+Max Recog Diff: 300901
+-----------------------------------------
+TRACE 7: 1671555570824586
+Decode Diff: 47126
+Trace Duration: 1219334
+Max Recog Diff: 293104
+-----------------------------------------
+TRACE 8: 1671555572695028
+Decode Diff: 44130
+Trace Duration: 1255706
+Max Recog Diff: 289644
+-----------------------------------------
+TRACE 9: 1671555574611938
+Decode Diff: 44519
+Trace Duration: 1292416
+Max Recog Diff: 295179
+-----------------------------------------

@@ -1,0 +1,80 @@
+TRACE 0: 1671490062470308
+Decode Diff: 23524
+Trace Duration: 1528761
+Max Recog Diff: 320993
+-----------------------------------------
+TRACE 1: 1671490064884523
+Decode Diff: 17740
+Trace Duration: 1405209
+Max Recog Diff: 118085
+-----------------------------------------
+TRACE 2: 1671490067047164
+Decode Diff: 19240
+Trace Duration: 1332739
+Max Recog Diff: 153286
+-----------------------------------------
+TRACE 3: 1671490069329808
+Decode Diff: 17970
+Trace Duration: 1324817
+Max Recog Diff: 60696
+-----------------------------------------
+TRACE 4: 1671490071303988
+Decode Diff: 18547
+Trace Duration: 1380024
+Max Recog Diff: 52501
+-----------------------------------------
+TRACE 5: 1671490073315400
+Decode Diff: 17745
+Trace Duration: 1287038
+Max Recog Diff: 166865
+-----------------------------------------
+TRACE 6: 1671490075239462
+Decode Diff: 18233
+Trace Duration: 1230120
+Max Recog Diff: 144119
+-----------------------------------------
+TRACE 7: 1671490077043361
+Decode Diff: 17123
+Trace Duration: 1283500
+Max Recog Diff: 82479
+-----------------------------------------
+TRACE 8: 1671490078933404
+Decode Diff: 18000
+Trace Duration: 1427938
+Max Recog Diff: 106777
+-----------------------------------------
+TRACE 9: 1671490080913323
+Decode Diff: 17594
+Trace Duration: 1324698
+Max Recog Diff: 161092
+-----------------------------------------
+TRACE 10: 1671490082855735
+Decode Diff: 17467
+Trace Duration: 1392848
+Max Recog Diff: 86999
+-----------------------------------------
+TRACE 11: 1671490084755485
+Decode Diff: 17368
+Trace Duration: 1326530
+Max Recog Diff: 116998
+-----------------------------------------
+TRACE 12: 1671490086798464
+Decode Diff: 17815
+Trace Duration: 1311319
+Max Recog Diff: 157509
+-----------------------------------------
+TRACE 13: 1671490088807543
+Decode Diff: 17482
+Trace Duration: 1345633
+Max Recog Diff: 162141
+-----------------------------------------
+TRACE 14: 1671490090861170
+Decode Diff: 19875
+Trace Duration: 1344656
+Max Recog Diff: 173633
+-----------------------------------------
+TRACE 15: 1671490093020483
+Decode Diff: 17140
+Trace Duration: 1313806
+Max Recog Diff: 118239
+-----------------------------------------
